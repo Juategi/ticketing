@@ -1,0 +1,2 @@
+# Ignore node_modules in auth
+/auth/node_modules/
