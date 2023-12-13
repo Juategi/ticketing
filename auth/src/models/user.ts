@@ -26,6 +26,9 @@ const userSchema: mongoose.Schema = new mongoose.Schema({
     password: { type: String, required: true },
 });
 
+// This is a mongoose middleware function that will run
+// before a document is saved to the database. We hash the
+// password here.
 userSchema.pre("save", async function (done) {
     if (this.isModified("password")) {
         const hashed = await Password.toHash(this.get("password"));
