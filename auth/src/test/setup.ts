@@ -1,11 +1,12 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import { app } from '../src/app';
+import { app } from '../app';
 
 let mongo: any;
 
 beforeAll(async () => {
-    mongo = new MongoMemoryServer();
+    process.env.JWT_KEY = 'asdfasdf';
+    const mongo = await MongoMemoryServer.create();
     const mongoUri = mongo.getUri();
     await mongoose.connect(mongoUri, {});
 });
@@ -17,7 +18,6 @@ beforeEach(async () => {
     }
     ); 
 });
-
 
 afterAll(async () => {
     if (mongo) {
